@@ -1,0 +1,64 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+#root {
+  /* max-width: 1280px; */
+  margin: 0;
+  /* padding: 2rem; */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes new-pulse-glow {
+  from {
+    filter: drop-shadow(0 0 2px #ff00ff);
+  }
+  to {
+    filter: drop-shadow(0 0 8px #00ffff);
+  }
+}
+
+.imp-border {
+  position: relative;
+  width: 80px;
+  height: 92.38px;
+  margin: 0px;
+  background-color: #c1bfc100;
+  transition: all 0.3s ease-in-out;
+  clip-path: none;
+  animation: new-pulse-glow 1.5s infinite alternate;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
