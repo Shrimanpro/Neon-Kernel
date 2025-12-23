@@ -77,6 +77,14 @@ function App() {
   }
 ];
 
+// Future colors
+// borderColor: "#F97316",
+// gradient: "linear-gradient(145deg, #F97316, #000)"
+// borderColor: "#EF4444",
+// gradient: "linear-gradient(145deg, #EF4444, #000)"
+// borderColor: "#8B5CF6",
+// gradient: "linear-gradient(145deg, #8B5CF6, #000)"
+
 const aboutMe = "Hey, I’m Shriman — a student and upcoming developer who loves building things that blend logic, creativity, and purpose. I explore the full spectrum of software — from systems programming that runs under the hood, to games that spark imagination, to full-stack apps that connect ideas to people.I see coding as a form of craftsmanship — every line should serve a reason, not just a function. Whether I’m designing gameplay systems, optimizing compilers, or shaping smooth user experiences, I’m driven by the same principle: clarity through creation. Right now, I’m continuing to grow as a developer, taking on projects that challenge how I think and refine how I build. My goal is simple: to create systems that feel alive and purposeful — and to keep learning with every step.";
 const motto = "கனவு காணுவது தவறு அல்ல; அவை கனவாகவே இருப்பதே தவறு.";
 
