@@ -150,10 +150,10 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
 
     {/* Tech Stack Section */}
     {
-    // <div className="col-span-full lg:col-span-12 flex justify-center mt-10 font-pixelify-sans">
-    // <Gravity>
-    // </Gravity>
-    // </div>
+    <div className="col-span-full lg:col-span-12 flex justify-center mt-10 font-pixelify-sans">
+    <Gravity>
+    </Gravity>
+    </div>
     }
 
 
