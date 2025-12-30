@@ -319,7 +319,7 @@ const technologies = [
 
   return (
     <div className="pixel-app min-h-screen bg-transparent w-full text-white flex flex-col items-center p-8 overflow-hidden">
-      <div className="w-full max-w-5xl h-[700px] rounded-[3rem] bg-neutral-900/30 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+      <div className="w-full max-w-5xl h-[700px] rounded-[5rem] bg-neutral-900/30 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
         <Gravity debug={false} gravity={{ x: 0, y: 1 }} className="w-full h-full">
           {technologies.map((tech, index) => (
             <MatterBody 
@@ -328,7 +328,7 @@ const technologies = [
               y={50 + Math.floor(index / 5) * 120} 
               angle={Math.random() * 360}
               bodyType="hexagon"
-              matterBodyOptions={{ restitution: 0.2, friction: 0.7, density: 0.3 }}
+              matterBodyOptions={{ restitution: 0.2, friction: 0.7, density: 1.3 }}
             >
               <div className="hexagon-border">
                 <div className="hexagon">
