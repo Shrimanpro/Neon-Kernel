@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import { FaJava, FaPython, FaRust, FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaDatabase, FaUnity, FaLinux, FaCode } from 'react-icons/fa';
-import { SiCplusplus, SiMariadb, SiUnrealengine, SiMysql, SiTailwindcss } from 'react-icons/si';
+import { SiCplusplus, SiMariadb, SiUnrealengine, SiMysql, SiTailwindcss, SiGodotengine} from 'react-icons/si';
 
 /** * UTILS **/
 const cn = (...classes) => classes.filter(Boolean).join(" ");
@@ -306,7 +306,7 @@ const technologies = [
   { name: 'HTML5', icon: <FaHtml5 /> },
   { name: 'CSS3', icon: <FaCss3Alt /> },
   { name: 'SQL', icon: <FaDatabase /> },
-  { name: 'GDScript', icon: <FaCode /> },
+  { name: 'GDScript', icon: <SiGodotengine /> },
   { name: 'Unity', icon: <FaUnity /> },
   { name: 'Linux', icon: <FaLinux /> },
   { name: 'MariaDB', icon: <SiMariadb /> },
@@ -318,11 +318,8 @@ const technologies = [
   if (!matterLoaded) return <div className="flex items-center justify-center min-h-screen text-white">Loading Physics...</div>;
 
   return (
-    <div className="pixel-app min-h-screen bg-neutral-950 text-white flex flex-col items-center p-8 overflow-hidden">
-      <h1 className="text-5xl font-bold mb-4">Tech Sandbox</h1>
-      <p className="mb-8 opacity-70 italic text-xl">Drag and toss the hexagons!</p>
-
-      <div className="w-full max-w-5xl h-[700px] border-4 border-white/5 rounded-[3rem] bg-neutral-900/50 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+    <div className="pixel-app min-h-screen bg-transparent w-full text-white flex flex-col items-center p-8 overflow-hidden">
+      <div className="w-full max-w-5xl h-[700px] rounded-[5rem] bg-neutral-900/30 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
         <Gravity debug={false} gravity={{ x: 0, y: 1 }} className="w-full h-full">
           {technologies.map((tech, index) => (
             <MatterBody 
@@ -331,7 +328,7 @@ const technologies = [
               y={50 + Math.floor(index / 5) * 120} 
               angle={Math.random() * 360}
               bodyType="hexagon"
-              matterBodyOptions={{ restitution: 0.7, friction: 0.05 }}
+              matterBodyOptions={{ restitution: 0.2, friction: 0.7, density: 1.3 }}
             >
               <div className="hexagon-border">
                 <div className="hexagon">
@@ -396,7 +393,7 @@ const technologies = [
           position: absolute;
           opacity: 0;
           transition: opacity 0.3s ease-in-out;
-          font-size: 0.6rem;
+          font-size: 1.0rem;
           text-align: center;
           padding: 0 4px;
         }
