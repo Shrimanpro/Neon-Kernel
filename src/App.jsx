@@ -74,14 +74,28 @@ function App() {
     longDescription: "Haven started with a simple idea — that technology could do more than just talk; it could listen. During SunHacks 2025, I built a web app that gave people a space to vent, reflect, and meditate freely. Using React, TailwindCSS, and FastAPI, I designed a full-stack platform where users could write journal entries and receive thoughtful reflections through the Gemini API. To make each moment feel personal, I integrated Imagen 3, allowing the app to generate calming visuals that mirrored the user’s emotions. Building Haven taught me the balance between emotion and engineering — that good design isn’t just about functionality, it’s about how a product feels in someone’s hands.",
     borderColor: "#22C55E",
     gradient: "linear-gradient(145deg, #22C55E, #000)"
+  },
+  {
+    image: "./assets/haven.jpg",
+    title: "Melody-OS",
+    subtitle: "Embedded Linux Developer",
+    github: "https://github.com/Shrimanpro/melody-os",
+    longDescription: "Instead of running a full Linux distribution on a Raspberry Pi, I wanted to build exactly what I needed, nothing more. Using Buildroot, I created a minimal custom operating system from the ground up, selecting kernel options and packages intentionally rather than layering on top of an existing environment. The goal was to turn the Pi into a dedicated, headless music server running Mopidy, with Iris providing a clean web interface accessible through a local IP and port. Connected directly to my speakers, the system allows anyone on the network to control playback seamlessly from a browser. Keeping the OS minimal forced me to think carefully about dependencies, cross-compilation, and system design decisions instead of relying on convenience defaults. As I continue integrating Mopidy and Iris directly into the image and preparing custom init scripts for automatic startup, Melody-OS is evolving into a tightly controlled, purpose-built embedded system — one shaped by intention rather than excess.",
+    borderColor: "#F97316",
+    gradient: "linear-gradient(145deg, #F97316, #000)"
+  },
+  {
+    image: "./assets/haven.jpg",
+    title: "Shrimp Editor",
+    subtitle: "Low-Level Systems Developer",
+    github: "https://github.com/Shrimanpro/shrimp-editor",
+    longDescription: "Shrimp Editor began as a deliberate rejection of abstraction. Instead of relying on libraries like ncurses, I chose to build a lightweight terminal-based text editor entirely from scratch in C, interacting directly with the kernel through termios and raw VT100 escape sequences. By disabling canonical mode and echo, Shrimp processes input byte-by-byte, giving me full control over terminal behavior rather than depending on buffered line input. Rendering is handled through a double-buffered append buffer system, constructing each frame in memory and flushing it in a single write() syscall to eliminate flicker. The editor implements line insertion and deletion, infinite scrolling for large files, incremental search, and ANSI-based syntax highlighting for C/C++. Underneath it all are carefully designed data structures — including an erow abstraction for text lines and a centralized editor state machine to track cursor position and window dimensions. Building Shrimp forced me to think in terms of memory layout, syscall efficiency, terminal control sequences, and performance tradeoffs, turning the terminal from a black box into a controlled, programmable environment.",
+    borderColor: "#EF4444",
+    gradient: "linear-gradient(145deg, #EF4444, #000)"
   }
 ];
 
 // Future colors
-// borderColor: "#F97316",
-// gradient: "linear-gradient(145deg, #F97316, #000)"
-// borderColor: "#EF4444",
-// gradient: "linear-gradient(145deg, #EF4444, #000)"
 // borderColor: "#8B5CF6",
 // gradient: "linear-gradient(145deg, #8B5CF6, #000)"
 
