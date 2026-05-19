@@ -76,16 +76,16 @@ function App() {
     gradient: "linear-gradient(145deg, #22C55E, #000)"
   },
   {
-    image: "./assets/haven.jpg",
+    image: "./assets/melody_os.jpg",
     title: "Melody-OS",
-    subtitle: "Embedded Linux Developer",
+    subtitle: "Kernel Developer",
     github: "https://github.com/Shrimanpro/melody-os",
-    longDescription: "Instead of running a full Linux distribution on a Raspberry Pi, I wanted to build exactly what I needed, nothing more. Using Buildroot, I created a minimal custom operating system from the ground up, selecting kernel options and packages intentionally rather than layering on top of an existing environment. The goal was to turn the Pi into a dedicated, headless music server running Mopidy, with Iris providing a clean web interface accessible through a local IP and port. Connected directly to my speakers, the system allows anyone on the network to control playback seamlessly from a browser. Keeping the OS minimal forced me to think carefully about dependencies, cross-compilation, and system design decisions instead of relying on convenience defaults. As I continue integrating Mopidy and Iris directly into the image and preparing custom init scripts for automatic startup, Melody-OS is evolving into a tightly controlled, purpose-built embedded system — one shaped by intention rather than excess.",
+    longDescription: "The idea for Melody OS started with a simple desire: I wanted a daily driver for my music that I actually understood from top to bottom. I was already meticulously checking spectrograms to verify my lossless files, but playing them back meant relying on general-purpose Linux distributions. Even after stripping a distro down, it was still bogged down by background processes, complex package dependencies, and scheduling overhead that a dedicated audio player simply doesn't need. My hardware had its own limitations, and running a bloated OS for a single task felt incredibly inefficient. I realized that to get truly deterministic playback out of my Raspberry Pi and straight into my Logitech G560 speakers, I needed to drop the middleman completely. I decided to write a bare-metal operating system from scratch in Rust, engineered for exactly one purpose: uninterrupted, bit-perfect audio sequencing. By bypassing the Linux kernel entirely and writing custom device drivers, I traded black-box complexity for absolute system control. It turned a hardware constraint into an exercise in modern systems architecture, resulting in a tool I can actually use every day.",
     borderColor: "#F97316",
     gradient: "linear-gradient(145deg, #F97316, #000)"
   },
   {
-    image: "./assets/haven.jpg",
+    image: "./assets/shrimp_editor.png",
     title: "Shrimp Editor",
     subtitle: "Low-Level Systems Developer",
     github: "https://github.com/Shrimanpro/shrimp-editor",
