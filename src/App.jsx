@@ -74,14 +74,28 @@ function App() {
     longDescription: "Haven started with a simple idea — that technology could do more than just talk; it could listen. During SunHacks 2025, I built a web app that gave people a space to vent, reflect, and meditate freely. Using React, TailwindCSS, and FastAPI, I designed a full-stack platform where users could write journal entries and receive thoughtful reflections through the Gemini API. To make each moment feel personal, I integrated Imagen 3, allowing the app to generate calming visuals that mirrored the user’s emotions. Building Haven taught me the balance between emotion and engineering — that good design isn’t just about functionality, it’s about how a product feels in someone’s hands.",
     borderColor: "#22C55E",
     gradient: "linear-gradient(145deg, #22C55E, #000)"
+  },
+  {
+    image: "./assets/melody_os.jpg",
+    title: "Melody-OS",
+    subtitle: "Kernel Developer",
+    github: "https://github.com/Shrimanpro/melody-os",
+    longDescription: "The idea for Melody OS started with a simple desire: I wanted a daily driver for my music that I actually understood from top to bottom. I was already meticulously checking spectrograms to verify my lossless files, but playing them back meant relying on general-purpose Linux distributions. Even after stripping a distro down, it was still bogged down by background processes, complex package dependencies, and scheduling overhead that a dedicated audio player simply doesn't need. My hardware had its own limitations, and running a bloated OS for a single task felt incredibly inefficient. I realized that to get truly deterministic playback out of my Raspberry Pi and straight into my Logitech G560 speakers, I needed to drop the middleman completely. I decided to write a bare-metal operating system from scratch in Rust, engineered for exactly one purpose: uninterrupted, bit-perfect audio sequencing. By bypassing the Linux kernel entirely and writing custom device drivers, I traded black-box complexity for absolute system control. It turned a hardware constraint into an exercise in modern systems architecture, resulting in a tool I can actually use every day.",
+    borderColor: "#F97316",
+    gradient: "linear-gradient(145deg, #F97316, #000)"
+  },
+  {
+    image: "./assets/shrimp_editor.png",
+    title: "Shrimp Editor",
+    subtitle: "Low-Level Systems Developer",
+    github: "https://github.com/Shrimanpro/shrimp-editor",
+    longDescription: "Shrimp Editor began as a deliberate rejection of abstraction. Instead of relying on libraries like ncurses, I chose to build a lightweight terminal-based text editor entirely from scratch in C, interacting directly with the kernel through termios and raw VT100 escape sequences. By disabling canonical mode and echo, Shrimp processes input byte-by-byte, giving me full control over terminal behavior rather than depending on buffered line input. Rendering is handled through a double-buffered append buffer system, constructing each frame in memory and flushing it in a single write() syscall to eliminate flicker. The editor implements line insertion and deletion, infinite scrolling for large files, incremental search, and ANSI-based syntax highlighting for C/C++. Underneath it all are carefully designed data structures — including an erow abstraction for text lines and a centralized editor state machine to track cursor position and window dimensions. Building Shrimp forced me to think in terms of memory layout, syscall efficiency, terminal control sequences, and performance tradeoffs, turning the terminal from a black box into a controlled, programmable environment.",
+    borderColor: "#EF4444",
+    gradient: "linear-gradient(145deg, #EF4444, #000)"
   }
 ];
 
 // Future colors
-// borderColor: "#F97316",
-// gradient: "linear-gradient(145deg, #F97316, #000)"
-// borderColor: "#EF4444",
-// gradient: "linear-gradient(145deg, #EF4444, #000)"
 // borderColor: "#8B5CF6",
 // gradient: "linear-gradient(145deg, #8B5CF6, #000)"
 
