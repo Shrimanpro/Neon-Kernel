@@ -319,7 +319,7 @@ const technologies = [
 
   return (
     <div className="pixel-app bg-transparent w-full lg:w-1/2 text-white flex flex-col items-center p-8 overflow-hidden">
-      <div className="w-full max-w-5xl h-[700px] rounded-[5rem] bg-neutral-900/30 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+      <div className="w-full max-w-5xl h-[700px] rounded-[2rem] bg-neutral-900/80 border-none relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
         <Gravity debug={false} gravity={{ x: 0, y: 1 }} className="w-full h-full">
           {technologies.map((tech, index) => (
             <MatterBody 
