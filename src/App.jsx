@@ -172,7 +172,7 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
 
     {/* Tech Stack Section */}
     {
-    <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center mt-10 font-pixelify-sans">
+      <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center lg:justify-end mt-10 font-pixelify-sans">
     <Gravity>
     </Gravity>
     </div>
