@@ -103,8 +103,8 @@ const aboutMe = "Hey, I’m Shriman — a student and upcoming developer who lov
 const motto = "கனவு காணுவது தவறு அல்ல; அவை கனவாகவே இருப்பதே தவறு.";
 
   return (
-<div className="relative min-h-screen w-full overflow-visible bg-transparent font-pixelify-sans">
-  <div className='relative text-center bg-cyan-700/20 text-4xl h-00 rounded-b-3xl font-pixelify-sans'>
+<div className="relative min-h-screen w-full overflow-visible bg-transparent font-mojangles">
+  <div className='relative text-center bg-cyan-700/20 text-4xl h-00 rounded-b-3xl font-mojangles'>
     <TextType 
       text={["Performance by Design", "Memory Safe(ish)", "Latency Is a Choice"]}
       typingSpeed={75}
