@@ -107,9 +107,9 @@ const handleCardClick = (card) => {
               <img src={c.image} alt={c.title} loading="lazy" />
             </div>
             <footer className="chroma-info">
-              <h3 className="name font-pixelify-sans">{c.title}</h3>
+              <h3 className="name font-mojangles">{c.title}</h3>
               {c.handle && <span className="handle">{c.handle}</span>}
-              <p className="role font-pixelify-sans">{c.subtitle}</p>
+              <p className="role font-mojangles">{c.subtitle}</p>
               {c.location && <span className="location">{c.location}</span>}
             </footer>
           </article>

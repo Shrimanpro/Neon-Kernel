@@ -119,7 +119,7 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
   <div className="w-full mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
     {/* Profile + Links */}
-<div className="lg:col-span-4 flex flex-col items-center space-y-4 ml-4 sm:ml-6 lg:ml-10 lg:pl-28 font-pixelify-sans">
+<div className="lg:col-span-4 flex flex-col items-center space-y-4 ml-4 sm:ml-6 lg:ml-10 lg:pl-28 font-mojangles">
 
       <ProfileCard
         name="Shriman Oppilamani"
@@ -172,7 +172,7 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
 
     {/* Tech Stack Section */}
     {
-      <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center lg:justify-end mt-10 font-pixelify-sans">
+      <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center lg:justify-end mt-10 font-mojangles">
     <Gravity>
     </Gravity>
     </div>
