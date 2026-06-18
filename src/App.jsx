@@ -116,10 +116,10 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
   <RetroGrid className="fixed inset-0" />
 
   {/* Grid container with 12-column layout */}
-  <div className="w-full mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+  <div className="w-full max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
     {/* Profile + Links */}
-<div className="lg:col-span-4 flex flex-col items-center space-y-4 ml-4 sm:ml-6 lg:ml-10 lg:pl-28 font-mojangles">
+    <div className="lg:col-span-4 flex flex-col items-center lg:items-start space-y-4 font-mojangles">
 
       <ProfileCard
         name="Shriman Oppilamani"
@@ -147,9 +147,9 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
       </div>
     </div>
 
-
+  <div className="lg:col-span-8 flex flex-col gap-10 w-full">
     {/* Terminal Section */}
-    <div className="lg:col-span-8 flex justify-center lg:pl-32">
+    <div className="lg:col-span-8 flex justify-center lg:justify-end w-full">
       <div className="w-full max-w-3xl rounded-2xl shadow-lg shadow-cyan-400 bg-black">
         <Terminal>
           <TypingAnimation duration={100} delay={0}>$ ls</TypingAnimation>
@@ -171,12 +171,11 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
     </div>
 
     {/* Tech Stack Section */}
-    {
-      <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center lg:justify-end mt-10 font-mojangles">
+    <div className="touch-none overscroll-none w-full flex justify-end font-mojangles">
     <Gravity>
     </Gravity>
     </div>
-    }
+  </div>
 
 
     {/* Project Grid */}
