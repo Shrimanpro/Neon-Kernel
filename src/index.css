@@ -6,6 +6,18 @@
   --font-pixelify-sans:'Pixelify Sans', 'sans-serif'
 }
 
+@font-face {
+  font-family: mojangles;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/mojangles.otf") format("opentype");
+}
+
+@theme {
+  --font-mojangles: 'mojangles', sans-serif;
+}
+
 @custom-variant dark (&:is(.dark *));
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

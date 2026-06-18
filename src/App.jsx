@@ -103,8 +103,8 @@ const aboutMe = "Hey, I’m Shriman — a student and upcoming developer who lov
 const motto = "கனவு காணுவது தவறு அல்ல; அவை கனவாகவே இருப்பதே தவறு.";
 
   return (
-<div className="relative min-h-screen w-full overflow-visible bg-transparent font-pixelify-sans">
-  <div className='relative text-center bg-cyan-700/20 text-4xl h-00 rounded-b-3xl font-pixelify-sans'>
+<div className="relative min-h-screen w-full overflow-visible bg-transparent font-mojangles">
+  <div className='relative text-center bg-cyan-700/20 text-4xl h-00 rounded-b-3xl font-mojangles'>
     <TextType 
       text={["Performance by Design", "Memory Safe(ish)", "Latency Is a Choice"]}
       typingSpeed={75}
@@ -119,7 +119,7 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
   <div className="w-full mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
     {/* Profile + Links */}
-<div className="lg:col-span-4 flex flex-col items-center space-y-4 ml-4 sm:ml-6 lg:ml-10 lg:pl-28 font-pixelify-sans">
+<div className="lg:col-span-4 flex flex-col items-center space-y-4 ml-4 sm:ml-6 lg:ml-10 lg:pl-28 font-mojangles">
 
       <ProfileCard
         name="Shriman Oppilamani"
@@ -172,7 +172,7 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
 
     {/* Tech Stack Section */}
     {
-      <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center lg:justify-end mt-10 font-pixelify-sans">
+      <div className="touch-none overscroll-none col-span-full lg:col-span-12 flex justify-center lg:justify-end mt-10 font-mojangles">
     <Gravity>
     </Gravity>
     </div>
