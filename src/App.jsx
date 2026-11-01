@@ -1,10 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { IoIosDocument } from 'react-icons/io';
 import { motion } from 'framer-motion';
-import './App.css'
 import { RetroGrid } from "@/components/ui/retro-grid"
 import ProfileCard from '@/components/ProfileCard'
 import {
@@ -30,7 +27,6 @@ function App() {
     setSelectedProject(null);
   };
 
-  const [count, setCount] = useState(0)
 
   // initial information
   const items = [

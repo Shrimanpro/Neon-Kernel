@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/mojangles.otf") format("opentype");
+  src: url("./assets/fonts/mojangles.otf") format("opentype");
 }
 
 @theme {
