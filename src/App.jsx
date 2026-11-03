@@ -1,5 +1,6 @@
 import { RetroGrid } from '@/components/ui/retro-grid';
 import ProfileCard from '@/components/ProfileCard';
+import ProfileFlip from '@/components/ProfileFlip';
 import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/ui/terminal';
 import ChromaGrid from '@/components/ChromaGrid';
 import Gravity from '@/components/fancy/physics/gravity';
@@ -7,7 +8,16 @@ import GameButton from '@/components/GameButton';
 import { SkipLink, Header, StickyNav, Reveal, Now, Footer } from '@/components/sections/Layout';
 import { SocialLinks, EducationTimeline, ResumePreview } from '@/components/sections/Sidebar';
 import { projects } from './data/projects';
-import { profile, aboutMe, motto, education, experience, hackathons, now } from './data/profile';
+import {
+  profile,
+  aboutMe,
+  motto,
+  education,
+  experience,
+  hackathons,
+  now,
+  stats,
+} from './data/profile';
 
 // Old card format, built from src/data until the grid is rewritten.
 const items = projects.map((p) => ({
@@ -35,16 +45,17 @@ export default function App() {
       >
         {/* Profile card, pitch, links */}
         <div className="flex flex-col items-center gap-5 lg:col-span-4 lg:row-start-1 lg:items-start">
-          <ProfileCard
-            name={profile.name}
-            title={profile.title}
-            handle={profile.handle}
-            avatarUrl={profile.avatar}
-            iconUrl={profile.avatar}
-            showUserInfo={false}
-            enableTilt
-            enableMobileTilt={false}
-          />
+          <ProfileFlip stats={stats}>
+            <ProfileCard
+              name={profile.name}
+              title={profile.title}
+              handle={profile.handle}
+              avatarUrl={profile.avatar}
+              showUserInfo={false}
+              enableTilt
+              enableMobileTilt={false}
+            />
+          </ProfileFlip>
           <p className="max-w-md text-center text-sm leading-relaxed text-cyan-100 lg:text-left">
             {profile.pitch}
           </p>
