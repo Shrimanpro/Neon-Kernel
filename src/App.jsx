@@ -1,10 +1,10 @@
 import { RetroGrid } from '@/components/ui/retro-grid';
 import ProfileCard from '@/components/ProfileCard';
 import ProfileFlip from '@/components/ProfileFlip';
-import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/ui/terminal';
 import ChromaGrid from '@/components/ChromaGrid';
 import Gravity from '@/components/fancy/physics/gravity';
 import GameButton from '@/components/GameButton';
+import Shell from '@/components/shell/Shell';
 import { SkipLink, Header, StickyNav, Reveal, Now, Footer } from '@/components/sections/Layout';
 import { SocialLinks, EducationTimeline, ResumePreview } from '@/components/sections/Sidebar';
 import { projects } from './data/projects';
@@ -17,6 +17,7 @@ import {
   hackathons,
   now,
   stats,
+  skills,
 } from './data/profile';
 
 // Old card format, built from src/data until the grid is rewritten.
@@ -68,22 +69,14 @@ export default function App() {
             <GameButton />
           </div>
           <section id="about" aria-label="About me">
-            <div className="w-full rounded-2xl bg-black shadow-lg shadow-cyan-400">
-              <Terminal>
-                <TypingAnimation duration={100} delay={0}>
-                  $ cat motto.txt
-                </TypingAnimation>
-                <AnimatedSpan delay={1600} className="text-lg text-fuchsia-400">
-                  {motto.ta}
-                </AnimatedSpan>
-                <TypingAnimation duration={100} delay={3000}>
-                  $ cat about.txt
-                </TypingAnimation>
-                <AnimatedSpan delay={2400} className="text-cyan-200">
-                  {aboutMe}
-                </AnimatedSpan>
-              </Terminal>
-            </div>
+            <p className="print-only">{aboutMe}</p>
+            <Shell
+              projects={projects}
+              profile={profile}
+              aboutMe={aboutMe}
+              motto={motto}
+              skills={skills}
+            />
           </section>
           <div className="w-full touch-none overscroll-none">
             <Gravity />
