@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { complete, execute, promptFor } from './commands.js';
 import { INTRO_STEPS, useIntro } from './useIntro.js';
+import Snake from './Snake.jsx';
+import TypingTest from './TypingTest.jsx';
 
 const COLORS = {
   err: 'text-red-400',
@@ -247,6 +249,8 @@ function Shell({ projects, profile, aboutMe, motto, skills, onOpenProject }) {
             renderOut(l, l.id)
           ),
         )}
+        {mode === 'snake' && <Snake onExit={exitGame} />}
+        {mode === 'typing' && <TypingTest onExit={exitGame} />}
         {showInput && (
           <div className="flex items-center gap-2">
             <span className="shrink-0 text-fuchsia-400">{promptFor(cwd)}</span>

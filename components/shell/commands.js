@@ -18,6 +18,8 @@ export const COMMANDS = [
   'clear',
   'exit',
   'sudo',
+  'snake',
+  'typing',
 ];
 export const OPEN_TARGETS = ['resume', 'github', 'linkedin'];
 const ROOT_FILES = ['about.txt', 'motto.txt', 'resume.pdf'];
@@ -136,6 +138,8 @@ const HELP = [
   ['neofetch', 'system info'],
   ['open <resume|github|linkedin>', 'open in a new tab'],
   ['game', 'launch the game'],
+  ['snake', 'play snake'],
+  ['typing', 'typing speed test'],
   ['history', 'command history'],
   ['echo, date, clear, exit', 'the usual'],
 ];
@@ -260,6 +264,9 @@ export function execute(raw, ctx) {
         };
       }
       return { out: [t('rm: read-only file system', 'err')] };
+    case 'snake':
+    case 'typing':
+      return { out: [], effect: { type: 'game', name: cmd } };
     default:
       return { out: [t(`command not found: ${cmd} — try 'help'`, 'err')] };
   }
