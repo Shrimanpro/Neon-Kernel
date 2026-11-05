@@ -1,10 +1,11 @@
+import { useCallback, useState } from 'react';
 import { RetroGrid } from '@/components/ui/retro-grid';
 import ProfileCard from '@/components/ProfileCard';
 import ProfileFlip from '@/components/ProfileFlip';
-import ChromaGrid from '@/components/ChromaGrid';
 import Gravity from '@/components/fancy/physics/gravity';
 import GameButton from '@/components/GameButton';
 import Shell from '@/components/shell/Shell';
+import Projects from '@/components/sections/Projects';
 import { SkipLink, Header, StickyNav, Reveal, Now, Footer } from '@/components/sections/Layout';
 import { SocialLinks, EducationTimeline, ResumePreview } from '@/components/sections/Sidebar';
 import { projects } from './data/projects';
@@ -20,18 +21,13 @@ import {
   skills,
 } from './data/profile';
 
-// Old card format, built from src/data until the grid is rewritten.
-const items = projects.map((p) => ({
-  image: p.image,
-  title: p.title,
-  subtitle: p.role,
-  github: p.github,
-  longDescription: p.story,
-  borderColor: p.borderColor,
-  gradient: `linear-gradient(145deg, ${p.borderColor}, #000)`,
-}));
+const bySlug = Object.fromEntries(projects.map((p) => [p.slug, p]));
 
 export default function App() {
+  // Selected project; the detail view comes next.
+  const [, setOpenSlug] = useState(null);
+  const openProject = useCallback((slug) => bySlug[slug] && setOpenSlug(slug), []);
+
   return (
     <div className="relative min-h-screen w-full bg-transparent font-mojangles">
       <SkipLink />
@@ -76,6 +72,7 @@ export default function App() {
               aboutMe={aboutMe}
               motto={motto}
               skills={skills}
+              onOpenProject={openProject}
             />
           </section>
           <div className="w-full touch-none overscroll-none">
@@ -83,18 +80,12 @@ export default function App() {
           </div>
         </div>
 
-        {/* Projects */}
-        <section id="projects" className="col-span-full">
-          <ChromaGrid
-            className="mx-auto"
-            columns={3}
-            items={items}
-            radius={300}
-            damping={0.45}
-            fadeOut={0.6}
-            ease="power3.out"
-          />
-        </section>
+        {/* Projects (on phones this comes right after the terminal) */}
+        <div className="col-span-full">
+          <Reveal>
+            <Projects projects={projects} onOpen={openProject} />
+          </Reveal>
+        </div>
 
         {/* Education & experience | résumé, now */}
         <div className="col-span-full grid grid-cols-1 items-start gap-6 lg:grid-cols-12">

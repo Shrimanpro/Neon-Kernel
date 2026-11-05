@@ -1,187 +1,147 @@
-import { useRef, useEffect, useState} from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { motion } from 'framer-motion';
-import { FaTimes, FaGithub } from 'react-icons/fa';
+import { motion } from 'motion/react';
+import { FaStar } from 'react-icons/fa';
+import { useGithubRepo } from '@/src/hooks/useGithubRepo';
 import './ChromaGrid.css';
-import { WarpBackground } from "@/components/ui/warp-background"
 
-export const ChromaGrid = ({
+function CardStars({ github }) {
+  const repo = useGithubRepo(github);
+  // Zero stars reads as a negative on a card; only show once there's something to show.
+  if (!repo?.stars) return null;
+  return (
+    <span className="chroma-stars" aria-label={`${repo.stars} GitHub stars`}>
+      <FaStar aria-hidden="true" /> {repo.stars}
+    </span>
+  );
+}
+
+/**
+ * Project cards with a cursor spotlight that greys out the cards away from the pointer.
+ * Each card is a real <button>; the image carries a layoutId so it morphs into the modal.
+ */
+export default function ChromaGrid({
   items,
-  className = '',
+  onOpen,
   radius = 300,
-  columns = 3,
-  rows = 2,
   damping = 0.45,
   fadeOut = 0.6,
-  ease = 'power3.out'
-}) => {
+  ease = 'power3.out',
+}) {
   const rootRef = useRef(null);
   const fadeRef = useRef(null);
-  const setX = useRef(null);
-  const setY = useRef(null);
+  const rect = useRef(null);
+  const raf = useRef(0);
   const pos = useRef({ x: 0, y: 0 });
-
-  const data = items?.length ? items : demo;
-
-    const [selectedCard, setSelectedCard] = useState(null);
-      const handleCloseModal = () => setSelectedCard(null);
+  const setters = useRef({});
+  // The spotlight only makes sense with a hovering pointer.
+  const hover = typeof window !== 'undefined' && window.matchMedia?.('(hover: hover)').matches;
 
   useEffect(() => {
     const el = rootRef.current;
-    if (!el) return;
-    setX.current = gsap.quickSetter(el, '--x', 'px');
-    setY.current = gsap.quickSetter(el, '--y', 'px');
+    if (!el || !hover) return;
+    setters.current.x = gsap.quickSetter(el, '--x', 'px');
+    setters.current.y = gsap.quickSetter(el, '--y', 'px');
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
-    setX.current(pos.current.x);
-    setY.current(pos.current.y);
-  }, []);
+    setters.current.x(pos.current.x);
+    setters.current.y(pos.current.y);
+    const invalidate = () => (rect.current = null);
+    window.addEventListener('resize', invalidate);
+    window.addEventListener('scroll', invalidate, { passive: true });
+    return () => {
+      window.removeEventListener('resize', invalidate);
+      window.removeEventListener('scroll', invalidate);
+      cancelAnimationFrame(raf.current);
+      gsap.killTweensOf(pos.current);
+    };
+  }, [hover]);
 
-  const moveTo = (x, y) => {
-    gsap.to(pos.current, {
-      x,
-      y,
-      duration: damping,
-      ease,
-      onUpdate: () => {
-        setX.current?.(pos.current.x);
-        setY.current?.(pos.current.y);
-      },
-      overwrite: true
+  const handleMove = (e) => {
+    if (!hover) return;
+    const { clientX, clientY } = e;
+    const card = e.target.closest?.('.chroma-card');
+    cancelAnimationFrame(raf.current);
+    raf.current = requestAnimationFrame(() => {
+      rect.current ??= rootRef.current.getBoundingClientRect();
+      gsap.to(pos.current, {
+        x: clientX - rect.current.left,
+        y: clientY - rect.current.top,
+        duration: damping,
+        ease,
+        overwrite: true,
+        onUpdate: () => {
+          setters.current.x?.(pos.current.x);
+          setters.current.y?.(pos.current.y);
+        },
+      });
+      gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
+      if (card) {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${clientX - r.left}px`);
+        card.style.setProperty('--mouse-y', `${clientY - r.top}px`);
+      }
     });
-  };
-
-  const handleMove = e => {
-    const r = rootRef.current.getBoundingClientRect();
-    moveTo(e.clientX - r.left, e.clientY - r.top);
-    gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
   };
 
   const handleLeave = () => {
-    gsap.to(fadeRef.current, {
-      opacity: 1,
-      duration: fadeOut,
-      overwrite: true
-    });
+    if (!hover) return;
+    gsap.to(fadeRef.current, { opacity: 1, duration: fadeOut, overwrite: true });
   };
 
-const handleCardClick = (card) => {
-    setSelectedCard(card);
-  };
-
-  const handleCardMove = e => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-  };
-
- return (
-    <>
-      <div
-        ref={rootRef}
-        className={`chroma-grid ${className}`}
-        style={{
-          "--r": `${radius}px`,
-          "--cols": columns,
-          "--rows": rows,
-        }}
-        onPointerMove={handleMove}
-        onPointerLeave={handleLeave}
-      >
-        {data.map((c, i) => (
-          <article
-            key={i}
-            className="chroma-card"
-            onMouseMove={handleCardMove}
-            onClick={() => handleCardClick(c)}
-            style={{
-              "--card-border": c.borderColor || "transparent",
-              "--card-gradient": c.gradient,
-              cursor: c.url ? "pointer" : "default",
-            }}
-          >
-            <div className="chroma-img-wrapper">
-              <img src={c.image} alt={c.title} loading="lazy" />
-            </div>
-            <footer className="chroma-info">
-              <h3 className="name font-mojangles">{c.title}</h3>
-              {c.handle && <span className="handle">{c.handle}</span>}
-              <p className="role font-mojangles">{c.subtitle}</p>
-              {c.location && <span className="location">{c.location}</span>}
-            </footer>
-          </article>
-        ))}
-        <div className="chroma-overlay" />
-        <div ref={fadeRef} className="chroma-fade" />
-      </div>
-
-{/* Modal */}
-{selectedCard && (
-  <motion.div
-    className="fixed inset-0 bg-cyan-950/70 flex justify-center items-center z-50 overflow-y-auto px-2 sm:px-4 py-6"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-  >
-    <motion.div
-      className="relative bg-black rounded-lg border-2 border-fuchsia-400 w-full max-w-[150vw] sm:max-w-3xl md:max-w-3xl lg:max-w-6xl overflow-hidden flex flex-col shadow-xl my-6"
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.95, opacity: 0 }}
+  return (
+    <div
+      ref={rootRef}
+      className={`chroma-grid ${hover ? 'has-spotlight' : ''}`}
+      style={{ '--r': `${radius}px` }}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
     >
-        {/* Close Button */}
-        <button
-          className="absolute top-3 right-3 z-50 text-white text-3xl bg-black/60 rounded-full p-1 hover:bg-black/80"
-          onClick={handleCloseModal}
+      {items.map((c) => (
+        <motion.button
+          type="button"
+          layout="position"
+          key={c.slug}
+          className="chroma-card print-avoid-break"
+          onClick={() => onOpen(c.slug)}
+          aria-haspopup="dialog"
+          aria-label={`${c.title} — ${c.role}. Open details`}
+          style={{
+            '--card-border': c.borderColor,
+            '--card-gradient': `linear-gradient(145deg, ${c.borderColor}, #000)`,
+          }}
         >
-          <FaTimes className="text-fuchsia-400" />
-        </button>
-
-        {/* Image */}
-        <div className="w-full flex justify-center items-center bg-black">
-          <img
-            src={selectedCard.image}
-            alt={selectedCard.title}
-            className="w-full max-h-[30vh] sm:max-h-[35vh] md:max-h-[40vh] object-contain pt-3"
-          />
-        </div>
-
-        {/* Content */}
-        <div className="p-4 sm:p-6 overflow-y-auto max-h-[45vh] sm:max-h-[50vh] md:max-h-[55vh]">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-glow mb-2 sm:mb-0">
-              {selectedCard.title}
-            </h2>
-            {selectedCard.github && (
-              <a
-                href={selectedCard.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGithub className="text-2xl sm:text-3xl text-fuchsia-400" />
-              </a>
-            )}
+          <div className="chroma-img-wrapper">
+            <motion.img
+              layoutId={`project-img-${c.slug}`}
+              src={c.image}
+              alt=""
+              width={c.imageSize?.[0]}
+              height={c.imageSize?.[1]}
+              loading="lazy"
+              decoding="async"
+            />
+            {c.featured && <span className="chroma-badge">Featured</span>}
           </div>
-
-          {/* Long Description */}
-          <div className="bg-black/70 backdrop-blur-sm p-4 rounded-md mx-auto w-[95%] sm:w-[90%]">
-            <p className="text-base sm:text-lg text-white leading-relaxed whitespace-pre-wrap text-justify">
-              {selectedCard.longDescription}
-            </p>
+          <div className="chroma-info">
+            <h3 className="name font-mojangles">{c.title}</h3>
+            <p className="role font-mojangles">{c.role}</p>
+            <p className="summary">{c.summary}</p>
+            <ul className="chips" aria-label="Tech">
+              {c.tech.slice(0, 4).map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+            {c.github && <CardStars github={c.github} />}
           </div>
-        </div>
-    </motion.div>
-  </motion.div>
-)}
-
-
-
-
-    </>
+        </motion.button>
+      ))}
+      {hover && (
+        <>
+          <div className="chroma-overlay" />
+          <div ref={fadeRef} className="chroma-fade" />
+        </>
+      )}
+    </div>
   );
-};
-
-export default ChromaGrid;
+}
