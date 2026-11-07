@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { RetroGrid } from '@/components/ui/retro-grid';
 import ProfileCard from '@/components/ProfileCard';
+import GithubActivity from '@/components/sections/GithubActivity';
 import ProfileFlip from '@/components/ProfileFlip';
 import Gravity from '@/components/fancy/physics/gravity';
 import GameButton from '@/components/GameButton';
@@ -59,6 +60,9 @@ export default function App() {
             {profile.pitch}
           </p>
           <SocialLinks profile={profile} />
+          <div className="w-full">
+            <GithubActivity user={profile.handle} profileUrl={profile.links.github} />
+          </div>
         </div>
 
         {/* Terminal + tech stack */}
