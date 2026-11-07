@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { FaTimes, FaGithub, FaLock, FaStar } from 'react-icons/fa';
+import { diagrams } from '@/components/diagrams';
 import { formatRange } from '@/src/data/projects';
 import { useGithubRepo, timeAgo } from '@/src/hooks/useGithubRepo';
 
@@ -24,6 +25,7 @@ function RepoStats({ github }) {
 /** Must be rendered inside <AnimatePresence> so the exit animation plays. */
 export default function ProjectModal({ project, onClose }) {
   const dialogRef = useRef(null);
+  const Diagram = project.diagram ? diagrams[project.diagram] : null;
   const accent = project.borderColor;
 
   // Esc closes, Tab is trapped in the dialog, body scroll is locked, focus returns on close.
@@ -150,6 +152,15 @@ export default function ProjectModal({ project, onClose }) {
               ))}
             </ul>
           </section>
+
+          {Diagram && (
+            <section>
+              <h3 className="mb-2 text-lg text-cyan-300">How it works</h3>
+              <div className="rounded-lg border border-white/10 bg-neutral-950 p-3">
+                <Diagram />
+              </div>
+            </section>
+          )}
 
           <section>
             <h3 className="mb-2 text-lg text-cyan-300">The story</h3>

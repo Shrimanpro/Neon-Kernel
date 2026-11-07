@@ -26,6 +26,7 @@ export const projects = [
     story:
       "Melody OS started with a simple desire: I wanted a daily driver for my music that I actually understood from top to bottom. I was already checking spectrograms to verify my lossless files, but playing them back meant relying on general-purpose Linux distributions. Even stripped down, they were still carrying background processes, package dependencies and scheduling overhead that a dedicated audio player simply doesn't need. So I dropped the middleman and wrote a bare-metal operating system from scratch in Rust, built for exactly one purpose: turning an old PC into a jukebox. It boots from USB, finds music on a second USB stick, plays it through the on-board audio chip, and can be controlled from the keyboard or from any MPD client on the network. Writing every driver myself traded black-box complexity for complete control, and left me with a tool I can actually use every day.",
     borderColor: '#F97316',
+    diagram: 'melody-os',
   },
   {
     slug: 'shrimp-editor',
@@ -49,6 +50,7 @@ export const projects = [
     story:
       'Shrimp Editor began as a deliberate rejection of abstraction. Instead of relying on libraries like ncurses, I built a lightweight terminal text editor entirely from scratch in C, talking to the kernel through termios and raw VT100 escape sequences. Underneath it all are carefully designed data structures — an erow abstraction for text lines and a central editor state that tracks the cursor and window size. Building Shrimp forced me to think in terms of memory layout, syscall efficiency, terminal control sequences and performance trade-offs, turning the terminal from a black box into a programmable environment.',
     borderColor: '#EF4444',
+    diagram: 'shrimp-editor',
   },
   {
     slug: 'pseudocode-compiler',
@@ -70,6 +72,7 @@ export const projects = [
     story:
       'This was one of those projects where I wanted to test my limits. I built a compiler frontend in C++ for pseudocode — handling loops, conditionals and arithmetic expressions. Every piece, from the lexer to the parser, was handcrafted to transform text into logic. It gave me a much deeper appreciation for how programming languages work behind the scenes, and it solidified my interest in systems-level programming.',
     borderColor: '#3B82F6',
+    diagram: 'pseudocode-compiler',
   },
   {
     slug: 'zombie-killer',
