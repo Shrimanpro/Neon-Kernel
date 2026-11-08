@@ -93,3 +93,23 @@ body {
 .neon-pulse {
   animation: neon-pulse 1.5s infinite alternate;
 }
+
+/* Pause decorative animations when the tab is hidden (class set in main.jsx). */
+.tab-hidden *,
+.tab-hidden *::before,
+.tab-hidden *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

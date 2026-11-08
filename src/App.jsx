@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { AnimatePresence } from 'motion/react';
-import { RetroGrid } from '@/components/ui/retro-grid';
 import ProfileCard from '@/components/ProfileCard';
 import GithubActivity from '@/components/sections/GithubActivity';
 import ProfileFlip from '@/components/ProfileFlip';
@@ -9,6 +8,7 @@ import GameButton from '@/components/GameButton';
 import Shell from '@/components/shell/Shell';
 import Projects from '@/components/sections/Projects';
 import ProjectModal from '@/components/ProjectModal';
+import ShaderGrid from '@/components/background/ShaderGrid';
 import { SkipLink, Header, StickyNav, Reveal, Now, Footer } from '@/components/sections/Layout';
 import { SocialLinks, EducationTimeline, ResumePreview } from '@/components/sections/Sidebar';
 import { projects } from './data/projects';
@@ -34,7 +34,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen w-full bg-transparent font-mojangles">
       <SkipLink />
-      <RetroGrid className="fixed inset-0" />
+      <ShaderGrid />
 
       <Header profile={profile} />
       <StickyNav />
