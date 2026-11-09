@@ -99,6 +99,7 @@ function Shell({ projects, profile, aboutMe, motto, skills, onOpenProject }) {
     } else if (fx.type === 'project') onOpenProject?.(fx.slug);
     else if (fx.type === 'open') window.open(fx.url, '_blank', 'noopener,noreferrer');
     else if (fx.type === 'navigate') window.location.assign(fx.url);
+    else if (fx.type === 'devmode') window.dispatchEvent(new CustomEvent('nk:devmode'));
     else if (fx.type === 'game') setMode(fx.name);
   };
 

@@ -12,6 +12,7 @@ export const COMMANDS = [
   'neofetch',
   'open',
   'game',
+  'devmode',
   'history',
   'echo',
   'date',
@@ -140,6 +141,7 @@ const HELP = [
   ['game', 'launch the game'],
   ['snake', 'play snake'],
   ['typing', 'typing speed test'],
+  ['devmode', 'toggle developer mode'],
   ['history', 'command history'],
   ['echo, date, clear, exit', 'the usual'],
 ];
@@ -217,6 +219,8 @@ export function execute(raw, ctx) {
         out: [t('Launching game...', 'dim')],
         effect: { type: 'navigate', url: profile.game },
       };
+    case 'devmode':
+      return { out: [t('Toggling developer mode...', 'dim')], effect: { type: 'devmode' } };
     case 'history':
       return { out: history.map((h, i) => t(`${String(i + 1).padStart(4)}  ${h}`, 'dim')) };
     case 'echo':

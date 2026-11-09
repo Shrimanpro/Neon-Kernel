@@ -9,6 +9,7 @@ import Shell from '@/components/shell/Shell';
 import Projects from '@/components/sections/Projects';
 import ProjectModal from '@/components/ProjectModal';
 import ShaderGrid from '@/components/background/ShaderGrid';
+import DevMode from '@/components/devmode/DevMode';
 import { SkipLink, Header, StickyNav, Reveal, Now, Footer } from '@/components/sections/Layout';
 import { SocialLinks, EducationTimeline, ResumePreview } from '@/components/sections/Sidebar';
 import { projects } from './data/projects';
@@ -35,6 +36,7 @@ export default function App() {
     <div className="relative min-h-screen w-full bg-transparent font-mojangles">
       <SkipLink />
       <ShaderGrid />
+      <DevMode />
 
       <Header profile={profile} />
       <StickyNav />
