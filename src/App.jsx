@@ -3,7 +3,7 @@ import { AnimatePresence } from 'motion/react';
 import ProfileCard from '@/components/ProfileCard';
 import GithubActivity from '@/components/sections/GithubActivity';
 import ProfileFlip from '@/components/ProfileFlip';
-import Gravity from '@/components/fancy/physics/gravity';
+import TechStack from '@/components/fancy/physics/gravity';
 import GameButton from '@/components/GameButton';
 import Shell from '@/components/shell/Shell';
 import Projects from '@/components/sections/Projects';
@@ -81,9 +81,9 @@ export default function App() {
               onOpenProject={openProject}
             />
           </section>
-          <div className="w-full touch-none overscroll-none">
-            <Gravity />
-          </div>
+          <Reveal>
+            <TechStack />
+          </Reveal>
         </div>
 
         {/* Projects (on phones this comes right after the terminal) */}
