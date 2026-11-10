@@ -1,15 +1,10 @@
-import { useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useState } from 'react';
 import { AnimatePresence } from 'motion/react';
 import ProfileCard from '@/components/ProfileCard';
 import GithubActivity from '@/components/sections/GithubActivity';
 import ProfileFlip from '@/components/ProfileFlip';
-import TechStack from '@/components/fancy/physics/gravity';
 import GameButton from '@/components/GameButton';
 import Shell from '@/components/shell/Shell';
-import Projects from '@/components/sections/Projects';
-import ProjectModal from '@/components/ProjectModal';
-import ShaderGrid from '@/components/background/ShaderGrid';
-import DevMode from '@/components/devmode/DevMode';
 import { SkipLink, Header, StickyNav, Reveal, Now, Footer } from '@/components/sections/Layout';
 import { SocialLinks, EducationTimeline, ResumePreview } from '@/components/sections/Sidebar';
 import { projects } from './data/projects';
@@ -17,15 +12,26 @@ import {
   profile,
   aboutMe,
   motto,
+  skills,
   education,
   experience,
   hackathons,
   now,
   stats,
-  skills,
 } from './data/profile';
 
+// Below-the-fold and heavy (gsap, matter-js, diagrams) — loaded after first paint.
+const Projects = lazy(() => import('@/components/sections/Projects'));
+const TechStack = lazy(() => import('@/components/fancy/physics/gravity'));
+const ProjectModal = lazy(() => import('@/components/ProjectModal'));
+const DevMode = lazy(() => import('@/components/devmode/DevMode'));
+const ShaderGrid = lazy(() => import('@/components/background/ShaderGrid'));
+
 const bySlug = Object.fromEntries(projects.map((p) => [p.slug, p]));
+
+function Placeholder({ className }) {
+  return <div aria-hidden="true" className={className} />;
+}
 
 export default function App() {
   const [openSlug, setOpenSlug] = useState(null);
@@ -35,8 +41,10 @@ export default function App() {
   return (
     <div className="relative min-h-screen w-full bg-transparent font-mojangles">
       <SkipLink />
-      <ShaderGrid />
-      <DevMode />
+      <Suspense fallback={null}>
+        <ShaderGrid />
+        <DevMode />
+      </Suspense>
 
       <Header profile={profile} />
       <StickyNav />
@@ -70,7 +78,7 @@ export default function App() {
         {/* Terminal + tech stack */}
         <div className="flex w-full flex-col gap-8 lg:col-span-8 lg:row-start-1">
           <div className="relative z-10 flex justify-center lg:justify-end">
-            <GameButton />
+            <GameButton href={profile.game} />
           </div>
           <section id="about" aria-label="About me">
             <p className="print-only">{aboutMe}</p>
@@ -83,19 +91,23 @@ export default function App() {
               onOpenProject={openProject}
             />
           </section>
-          <Reveal>
-            <TechStack />
-          </Reveal>
+          <Suspense fallback={<Placeholder className="h-[390px] w-full lg:h-[560px]" />}>
+            <Reveal>
+              <TechStack />
+            </Reveal>
+          </Suspense>
         </div>
 
         {/* Projects (on phones this comes right after the terminal) */}
         <div className="col-span-full">
-          <Reveal>
-            <Projects projects={projects} onOpen={openProject} />
-          </Reveal>
+          <Suspense fallback={<Placeholder className="min-h-[600px]" />}>
+            <Reveal>
+              <Projects projects={projects} onOpen={openProject} />
+            </Reveal>
+          </Suspense>
         </div>
 
-        {/* Education & experience | résumé, now */}
+        {/* Education & experience | résumé, now, spider */}
         <div className="col-span-full grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
             <EducationTimeline
@@ -115,11 +127,13 @@ export default function App() {
 
       <Footer profile={profile} />
 
-      <AnimatePresence>
-        {openSlug && (
-          <ProjectModal key={openSlug} project={bySlug[openSlug]} onClose={closeProject} />
-        )}
-      </AnimatePresence>
+      <Suspense fallback={null}>
+        <AnimatePresence>
+          {openSlug && (
+            <ProjectModal key={openSlug} project={bySlug[openSlug]} onClose={closeProject} />
+          )}
+        </AnimatePresence>
+      </Suspense>
     </div>
   );
 }
