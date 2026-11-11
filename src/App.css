@@ -55,6 +55,10 @@
   animation: new-pulse-glow 1.5s infinite alternate;
 }
 
+.game-btn {
+  animation: new-pulse-glow 1.5s infinite alternate;
+}
+
 .card {
   padding: 2em;
 }

@@ -15,6 +15,7 @@ import {
 import ChromaGrid from '@/components/ChromaGrid'
 import TextType from '@/components/TextType';
 import Gravity, { MatterBody } from "@/components/fancy/physics/gravity"
+import GameButton from '@/components/GameButton'
 
 
 function App() {
@@ -148,6 +149,11 @@ const motto = "கனவு காணுவது தவறு அல்ல; அ
     </div>
 
   <div className="lg:col-span-8 flex flex-col gap-10 w-full">
+    {/* Game link */}
+    <div className="relative z-10 flex justify-end w-full max-w-3xl mx-auto lg:mr-0">
+      <GameButton />
+    </div>
+
     {/* Terminal Section */}
     <div className="lg:col-span-8 flex justify-center lg:justify-end w-full">
       <div className="w-full max-w-3xl rounded-2xl shadow-lg shadow-cyan-400 bg-black">
