@@ -118,5 +118,11 @@ export default defineConfig(({ mode }) => {
         '@': ROOT,
       },
     },
+    test: {
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.js'],
+      include: ['src/**/*.test.{js,jsx}', 'components/**/*.test.{js,jsx}'],
+      css: false,
+    },
   };
 });
