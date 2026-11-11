@@ -113,3 +113,92 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* 6.21 — print as a clean one-column résumé-style page. */
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+  :root,
+  html,
+  body,
+  #root {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print,
+  canvas,
+  nav,
+  .chroma-overlay,
+  .chroma-fade {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
+    color: #000 !important;
+    background: transparent !important;
+    border-color: #999 !important;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+  /* One column, text only. */
+  main,
+  main > div {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  main > div {
+    margin-bottom: 1rem;
+  }
+  #about .shell-print-hide,
+  #about > :not(.print-only),
+  .pc-card-wrapper,
+  .chroma-img-wrapper,
+  .chroma-stars,
+  header [aria-hidden='true'] {
+    display: none !important;
+  }
+  .chroma-grid {
+    display: block !important;
+  }
+  .chroma-card {
+    width: 100% !important;
+    border: 0 !important;
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+  .sr-only.print-only {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    white-space: normal !important;
+  }
+  ul.print-only {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+}
+.print-only {
+  display: none;
+}
