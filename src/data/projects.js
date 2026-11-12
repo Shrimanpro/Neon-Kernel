@@ -1,6 +1,8 @@
 // Project data. Order = display order (systems work first).
 // Dates: { start: 'YYYY-MM', end: 'YYYY-MM' | null }. end null means "Present".
 // categories drive the filter chips: Systems · Games · Web · Hackathon.
+// Optional media: demo (animated GIF shown in the modal instead of the still image),
+// gallery ([{ src, alt, caption, size }]) and live ({ href, label }) for a playable/hosted link.
 
 export const CATEGORIES = ['Systems', 'Games', 'Web', 'Hackathon'];
 
@@ -11,17 +13,27 @@ export const projects = [
     role: 'Kernel Developer',
     featured: true,
     categories: ['Systems'],
-    dates: { start: '2026-01', end: null },
-    image: './assets/melody_os.webp',
-    imageSize: [600, 600],
+    dates: { start: '2026-01', end: '2026-10' },
+    image: './assets/melody_os_player.jpg',
+    imageSize: [1400, 772],
+    gallery: [
+      {
+        src: './assets/melody_os_prototype.jpg',
+        alt: 'Early Melody OS demo-mode mock-up on a CRT-style text screen',
+        caption: 'Early prototype: the demo-mode mock-up before real storage and audio drivers.',
+        size: [1000, 714],
+      },
+    ],
     github: 'https://github.com/Shrimanpro/melody-os',
     tech: ['Rust (no_std)', 'x86_64', 'Intel HDA', 'USB EHCI/UHCI', 'FAT32', 'smoltcp', 'QEMU'],
     summary: 'A bare-metal x86_64 kernel in Rust that turns an old PC into a jukebox.',
+    imageAlt: 'Melody OS playing a FLAC track on real hardware',
     highlights: [
       'Boots from a USB stick and streams music from a second FAT32/FAT16 stick through its own EHCI/UHCI host-controller and mass-storage drivers.',
       'Decodes WAV, FLAC (up to 24-bit) and MP3 and plays them through a hand-written Intel HD Audio driver: analog or S/PDIF/HDMI output, native sample rates up to 192 kHz, hardware volume.',
       'Intel PRO/1000 and Realtek RTL8168 network drivers with smoltcp and DHCP, plus an MPD server on TCP 6600, so any MPD client (mpc, ncmpcpp, M.A.L.P.) can control it.',
-      'Tested in headless QEMU suites; every boot step prints a line before it runs, so a hang always says where it stopped.',
+      'HDMI audio on Intel G4x graphics: switches the port from DVI to HDMI mode, sends an AVI InfoFrame and hands the codec an ELD.',
+      'Tested in headless QEMU suites and on real Core 2 era desktops; every boot step prints a line before it runs, so a hang always says where it stopped.',
     ],
     story:
       "Melody OS started with a simple desire: I wanted a daily driver for my music that I actually understood from top to bottom. I was already checking spectrograms to verify my lossless files, but playing them back meant relying on general-purpose Linux distributions. Even stripped down, they were still carrying background processes, package dependencies and scheduling overhead that a dedicated audio player simply doesn't need. So I dropped the middleman and wrote a bare-metal operating system from scratch in Rust, built for exactly one purpose: turning an old PC into a jukebox. It boots from USB, finds music on a second USB stick, plays it through the on-board audio chip, and can be controlled from the keyboard or from any MPD client on the network. Writing every driver myself traded black-box complexity for complete control, and left me with a tool I can actually use every day.",

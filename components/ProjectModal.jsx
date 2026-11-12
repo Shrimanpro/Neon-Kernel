@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { FaTimes, FaGithub, FaLock, FaStar } from 'react-icons/fa';
+import { FaTimes, FaGithub, FaLock, FaStar, FaPlay } from 'react-icons/fa';
 import { diagrams } from '@/components/diagrams';
 import { formatRange } from '@/src/data/projects';
 import { useGithubRepo, timeAgo } from '@/src/hooks/useGithubRepo';
@@ -95,8 +95,8 @@ export default function ProjectModal({ project, onClose }) {
         <div className="bg-black px-3 pt-3">
           <motion.img
             layoutId={`project-img-${project.slug}`}
-            src={project.image}
-            alt={`${project.title} preview`}
+            src={project.demo ?? project.image}
+            alt={project.imageAlt ?? `${project.title} preview`}
             width={project.imageSize?.[0]}
             height={project.imageSize?.[1]}
             className="mx-auto max-h-[40vh] w-auto max-w-full rounded-lg object-contain"
@@ -126,6 +126,17 @@ export default function ProjectModal({ project, onClose }) {
                   <FaLock aria-hidden="true" /> Private repo — source available on request
                 </span>
               ) : null}
+              {project.live && (
+                <a
+                  href={project.live.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm text-white hover:bg-white/10"
+                  style={{ borderColor: accent }}
+                >
+                  <FaPlay aria-hidden="true" /> {project.live.label ?? 'Live demo'}
+                </a>
+              )}
               {project.github && <RepoStats github={project.github} />}
             </div>
           </header>
@@ -158,6 +169,30 @@ export default function ProjectModal({ project, onClose }) {
               <h3 className="mb-2 text-lg text-cyan-300">How it works</h3>
               <div className="rounded-lg border border-white/10 bg-neutral-950 p-3">
                 <Diagram />
+              </div>
+            </section>
+          )}
+
+          {project.gallery?.length > 0 && (
+            <section>
+              <h3 className="mb-2 text-lg text-cyan-300">Gallery</h3>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {project.gallery.map((g) => (
+                  <figure key={g.src} className="space-y-1.5">
+                    <img
+                      src={g.src}
+                      alt={g.alt}
+                      width={g.size?.[0]}
+                      height={g.size?.[1]}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-auto w-full rounded-lg border border-white/10"
+                    />
+                    {g.caption && (
+                      <figcaption className="text-xs text-neutral-400">{g.caption}</figcaption>
+                    )}
+                  </figure>
+                ))}
               </div>
             </section>
           )}

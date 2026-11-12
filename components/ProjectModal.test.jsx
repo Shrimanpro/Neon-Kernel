@@ -65,4 +65,11 @@ describe('ProjectModal', () => {
     expect(screen.getByText(/source available on request/i)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /github/i })).not.toBeInTheDocument();
   });
+
+  it('shows the gallery with captions when a project has extra images', () => {
+    render(<Harness project={melody} />);
+    expect(screen.getByRole('heading', { name: 'Gallery' })).toBeInTheDocument();
+    expect(screen.getByAltText(/demo-mode mock-up/i)).toBeInTheDocument();
+    expect(screen.getByText(/Early prototype/)).toBeInTheDocument();
+  });
 });
