@@ -20,6 +20,12 @@ function godotGame() {
       });
     },
     closeBundle() {
+      if (!fs.existsSync(GAME_DIR)) {
+        this.warn(
+          `game/web not found — skipping the Godot game copy (the "Bored?" link will 404).`,
+        );
+        return;
+      }
       fs.cpSync(GAME_DIR, path.resolve(ROOT, 'dist/web'), {
         recursive: true,
         filter: (src) => !src.endsWith('.import'),
