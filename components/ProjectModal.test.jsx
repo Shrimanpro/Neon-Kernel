@@ -8,6 +8,7 @@ import { projects } from '@/src/data/projects';
 
 const melody = projects.find((p) => p.slug === 'melody-os');
 const compiler = projects.find((p) => p.slug === 'pseudocode-compiler');
+const overdrive = projects.find((p) => p.slug === 'runtime-overdrive');
 
 function Harness({ project }) {
   const [open, setOpen] = useState(true);
@@ -71,5 +72,15 @@ describe('ProjectModal', () => {
     expect(screen.getByRole('heading', { name: 'Gallery' })).toBeInTheDocument();
     expect(screen.getByAltText(/demo-mode mock-up/i)).toBeInTheDocument();
     expect(screen.getByText(/Early prototype/)).toBeInTheDocument();
+  });
+
+  it('plays the animated demo and links to the live build', () => {
+    render(<Harness project={overdrive} />);
+    expect(screen.getByAltText(overdrive.imageAlt)).toHaveAttribute('src', overdrive.demo);
+    expect(screen.getByRole('link', { name: /Play it in your browser/ })).toHaveAttribute(
+      'href',
+      './web/index.html',
+    );
+    expect(screen.queryByRole('heading', { name: 'Gallery' })).not.toBeInTheDocument();
   });
 });

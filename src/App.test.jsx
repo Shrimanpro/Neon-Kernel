@@ -45,4 +45,14 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /SunHacks 2023/ })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /Melody OS —/ })).not.toBeInTheDocument();
   });
+
+  it('lists the desktop apps under the Apps filter', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await screen.findByRole('heading', { name: 'Projects' });
+    await user.click(screen.getByRole('button', { name: 'Apps' }));
+    expect(screen.getByRole('button', { name: /Coff-fi/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Better Preview/ })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Runtime Overdrive/ })).not.toBeInTheDocument();
+  });
 });

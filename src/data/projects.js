@@ -1,10 +1,10 @@
-// Project data. Order = display order (systems work first).
+// Project data. Order = display order (featured work first).
 // Dates: { start: 'YYYY-MM', end: 'YYYY-MM' | null }. end null means "Present".
-// categories drive the filter chips: Systems · Games · Web · Hackathon.
+// categories drive the filter chips: Systems · Apps · Games · Web · Hackathon.
 // Optional media: demo (animated GIF shown in the modal instead of the still image),
 // gallery ([{ src, alt, caption, size }]) and live ({ href, label }) for a playable/hosted link.
 
-export const CATEGORIES = ['Systems', 'Games', 'Web', 'Hackathon'];
+export const CATEGORIES = ['Systems', 'Apps', 'Games', 'Web', 'Hackathon'];
 
 export const projects = [
   {
@@ -39,6 +39,66 @@ export const projects = [
       "Melody OS started with a simple desire: I wanted a daily driver for my music that I actually understood from top to bottom. I was already checking spectrograms to verify my lossless files, but playing them back meant relying on general-purpose Linux distributions. Even stripped down, they were still carrying background processes, package dependencies and scheduling overhead that a dedicated audio player simply doesn't need. So I dropped the middleman and wrote a bare-metal operating system from scratch in Rust, built for exactly one purpose: turning an old PC into a jukebox. It boots from USB, finds music on a second USB stick, plays it through the on-board audio chip, and can be controlled from the keyboard or from any MPD client on the network. Writing every driver myself traded black-box complexity for complete control, and left me with a tool I can actually use every day.",
     borderColor: '#F97316',
     diagram: 'melody-os',
+  },
+  {
+    slug: 'coff-fi',
+    title: 'Coff-fi',
+    role: 'Cross-Platform App Developer',
+    featured: true,
+    categories: ['Apps'],
+    dates: { start: '2026-10', end: null },
+    image: './assets/coff-fi-dark.jpg',
+    imageSize: [1600, 1004],
+    imageAlt: 'Coff-fi home screen, dark theme',
+    gallery: [
+      {
+        src: './assets/coff-fi-light.jpg',
+        alt: 'Coff-fi home screen, light theme',
+        caption: 'The same home screen in the light theme.',
+        size: [1600, 1004],
+      },
+    ],
+    private: true,
+    tech: ['Rust', 'Tauri 2', 'Svelte 5', 'Symphonia', 'cpal', 'SQLite', 'Swift (iOS)'],
+    summary:
+      'A cosy music player for your own library: one Rust + Svelte codebase for desktop and iPhone.',
+    highlights: [
+      'Native Rust audio engine: Symphonia decoding, rubato sinc resampling and cpal output through a lock-free ring buffer, with gapless playback, crossfade, a 10-band EQ and ReplayGain.',
+      'Plays local files (parallel rayon scan into SQLite, tags via lofty) or a Navidrome server mirrored into the same database, so every view works the same either way.',
+      'Synced lyrics from tags, sibling .lrc files or LRCLIB, including word-synced enhanced LRC with background vocals.',
+      'Every instance runs a WebSocket server advertised over Bonjour, so any Coff-fi on the network can drive any other, Spotify Connect-style.',
+      'Ships for macOS, Windows, Linux and iOS; a thin Swift layer on iOS wires the Rust engine into the lock screen, AirPlay, Siri and the Files app.',
+    ],
+    story:
+      "Coff-fi is the player I wanted for my own music library: something calm to look at, with an audio path I could reason about end to end. The UI is Svelte 5 inside a Tauri 2 webview, but everything that touches audio, files or the network lives in Rust, from decoding and resampling to the ring buffer that feeds the sound card. One codebase ends up on my laptop and my phone, it can stream from my Navidrome server when I'm away from my files, and any copy on the network can take over playback on another. It pushed me to think about real-time audio constraints, cross-platform packaging and where a native layer actually earns its place.",
+    borderColor: '#D4A056',
+  },
+  {
+    slug: 'better-preview',
+    title: 'Better Preview',
+    role: 'macOS Developer',
+    featured: true,
+    categories: ['Apps'],
+    dates: { start: '2026-11', end: null },
+    image: './assets/better-preview.jpg',
+    imageSize: [760, 727],
+    demo: './assets/better-preview-demo.gif',
+    imageAlt:
+      'Better Preview: vim scrolling, catppuccin recolor, incremental search and :theme nord',
+    private: true,
+    tech: ['Swift 6', 'AppKit', 'PDFKit', 'Vision', 'SyncTeX'],
+    summary:
+      "Apple Preview's feature set driven like zathura: vim keys, a : command line and themes.",
+    highlights: [
+      'PDF markup, forms and signatures, page management, image editing, OCR and export, all reachable from vim keys with counts, marks, a jump list and a : command line with completion.',
+      '15 built-in themes plus user-defined ones, page recoloring and a live-reloaded rc file.',
+      'SyncTeX in both directions: Cmd-click inverse search into your editor, forward search through a better-preview:// URL.',
+      'A single Swift + AppKit + PDFKit app with no third-party Swift dependencies; opens a 500-page PDF in ~130–170 ms, scrolls at 60 Hz without dropped frames, uses ~70 MB and idles at 0% CPU.',
+      '138 unit tests on the core library.',
+    ],
+    story:
+      "I read a lot of PDFs, and I wanted Apple Preview's features without reaching for the mouse. zathura gets the keyboard part right but not the macOS part, so I built a native app that does both: Preview's markup, forms, signatures and page tools, driven by vim keys and a command line, with themes that recolor the page and SyncTeX for LaTeX work. Keeping it dependency-free and measuring it (open time, frame drops, memory, idle CPU) made performance a design constraint from the start rather than an afterthought.",
+    borderColor: '#5E81AC',
   },
   {
     slug: 'shrimp-editor',
@@ -85,6 +145,33 @@ export const projects = [
       'This was one of those projects where I wanted to test my limits. I built a compiler frontend in C++ for pseudocode — handling loops, conditionals and arithmetic expressions. Every piece, from the lexer to the parser, was handcrafted to transform text into logic. It gave me a much deeper appreciation for how programming languages work behind the scenes, and it solidified my interest in systems-level programming.',
     borderColor: '#3B82F6',
     diagram: 'pseudocode-compiler',
+  },
+  {
+    slug: 'runtime-overdrive',
+    title: 'Runtime Overdrive',
+    role: 'Game Developer',
+    featured: true,
+    categories: ['Games'],
+    dates: { start: '2025-12', end: '2026-11' },
+    image: './assets/runtime-overdrive.jpg',
+    imageSize: [480, 270],
+    demo: './assets/runtime-overdrive-demo.gif',
+    imageAlt: 'Driving through the Suburbs stretch at 100+ mph, weaving through traffic',
+    private: true,
+    live: { href: './web/index.html', label: 'Play it in your browser' },
+    tech: ['Godot 4.7', 'GDScript', 'WebAssembly', 'Python'],
+    summary:
+      'A synthwave racer through the commits of my life, with a minigame at every checkpoint.',
+    highlights: [
+      'Pseudo-3D segment-projection road with curves, hills, traffic and a checkpoint gate; car hits are tested against the Miata’s on-screen silhouette.',
+      'Five one-attempt minigames, one per life stage: a block puzzle, a turn-based battle, a 3-phase boss arena, a rhythm battle and a real-3D first-person maze.',
+      'Medals, story dialog with a figure made of TV static, and four endings that depend on your medals and choices.',
+      'A 640x360 canvas behind a CRT shader; every sprite, backdrop, sound effect and the Stage 4 song are generated by Python scripts.',
+      'Single-threaded web export so it runs on hosts without cross-origin isolation headers — it is hosted right on this site.',
+    ],
+    story:
+      'Runtime Overdrive is my academic journey told as a night drive. You race a crimson Miata down a neon highway through six stretches of one life, from the suburbs to grad school, and every checkpoint is a minigame for a chapter of it: college applications become a turn-based battle, the weed-out courses become a boss fight. Each minigame gets one attempt, and losing never ends the run, which felt truer to life than a game-over screen. Building it meant writing a pseudo-3D road renderer, five different game genres and a script-driven asset pipeline, all in Godot and shipped to the web.',
+    borderColor: '#FF00C8',
   },
   {
     slug: 'zombie-killer',
