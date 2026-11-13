@@ -25,7 +25,7 @@ export const aboutMe =
 
 export const motto = {
   ta: 'கனவு காணுவது தவறு அல்ல; அவை கனவாகவே இருப்பதே தவறு.',
-  en: "It's not wrong to dream; the wrong is to let them stay dreams.",
+  en: "It's not wrong to dream; it's wrong to let them stay as dreams.",
 };
 
 export const education = [
